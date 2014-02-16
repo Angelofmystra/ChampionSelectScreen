@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -37,7 +38,7 @@ public class ChampionSelect extends Application {
     public void start(Stage primaryStage) {
         Group root = new Group();
         primaryStage.setResizable(true);
-        primaryStage.setScene(new Scene(root, 800,800));
+        primaryStage.setScene(new Scene(root, 1600,1200));
         
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-border-color: black;");
@@ -63,15 +64,6 @@ public class ChampionSelect extends Application {
         
         root.getChildren().add(borderPane);
         
-        /*VBox vbox = new VBox(8); // spacing = 8
-        vbox.getChildren().addAll(new Button("Cut"), new Button("Copy"), new Button("Paste"));
-        
-        VBox vbox2 = new VBox(8); // spacing = 8
-        vbox2.getChildren().addAll(new Button("Cut"), new Button("Copy"), new Button("Paste"));
-        
-        borderPane.setLeft(vbox);
-        borderPane.setRight(vbox2);*/
-        
         VBox centerBox = new VBox(8);
         HBox panelBox = new HBox(8);
         
@@ -84,13 +76,22 @@ public class ChampionSelect extends Application {
             tilePane.getChildren().add(buttons[j]);
         }
         
+        TabPane champsAndSkinsPane = new TabPane();
+        Tab championsTab = new Tab("Champions");
+        Tab skinsTab = new Tab("Skins");
+        championsTab.setContent(tilePane);
+        Button temporary = new Button("Temporary Skin Object");
+        skinsTab.setContent(temporary);
+        champsAndSkinsPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        champsAndSkinsPane.getTabs().addAll(championsTab, skinsTab);
+        
         Button lockin = new Button("Lock In");
         Button spells = new Button("Spells");
         Button runesnmasteries = new Button("Runes and Masteries");
         
         panelBox.getChildren().addAll(runesnmasteries, spells, lockin);
         
-        centerBox.getChildren().addAll(tilePane, panelBox);
+        centerBox.getChildren().addAll(champsAndSkinsPane, panelBox);
         borderPane.setCenter(centerBox);
         
         HBox botBox = new HBox();
