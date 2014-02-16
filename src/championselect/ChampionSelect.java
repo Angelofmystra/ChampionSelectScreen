@@ -7,11 +7,14 @@
 package championselect;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,11 +49,11 @@ public class ChampionSelect extends Application {
      //   borderPane.setTop(toolbar); 
         
         //Left content
-        Rectangle leftRectangle = new Rectangle(23, 745, Color.BLUE);
+        Rectangle leftRectangle = new Rectangle(23, 400, Color.BLUE); //745
         leftRectangle.setStroke(Color.BLUE);
         borderPane.setLeft(leftRectangle);        
         //Right content
-        Rectangle rightRectangle = new Rectangle(23, 745, Color.GREENYELLOW);
+        Rectangle rightRectangle = new Rectangle(23, 400, Color.GREENYELLOW);
         rightRectangle.setStroke(Color.GREENYELLOW);
         borderPane.setRight(rightRectangle);        
         //Bot content
@@ -89,6 +92,27 @@ public class ChampionSelect extends Application {
         
         centerBox.getChildren().addAll(tilePane, panelBox);
         borderPane.setCenter(centerBox);
+        
+        HBox botBox = new HBox();
+        final ListView<ImageView> blueBans = new ListView<ImageView>();
+        final ListView<ImageView> purpleBans = new ListView<ImageView>();
+        blueBans.setItems(FXCollections.observableArrayList(
+                new ImageView(ICON_48), new ImageView(ICON_48), new ImageView(ICON_48)
+        ));
+        
+        purpleBans.setItems(FXCollections.observableArrayList(
+                new ImageView(ICON_48), new ImageView(ICON_48), new ImageView(ICON_48)
+        ));
+        VBox vbox3 = new VBox();
+        ChatTab allyChatTab = new ChatTab("Ally Chat");
+        ChatTab enemyChatTab = new ChatTab("Enemy Chat");
+        TabPane tabPane = new TabPane();
+        tabPane.getTabs().add(allyChatTab.getTab());
+        tabPane.getTabs().add(enemyChatTab.getTab());
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        botBox.getChildren().addAll(blueBans, tabPane, purpleBans);
+        borderPane.setBottom(botBox);
+        
         primaryStage.setTitle("Champion Selection Screen");
         primaryStage.show();
     }
