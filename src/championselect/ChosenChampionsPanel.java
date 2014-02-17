@@ -6,7 +6,9 @@
 
 package championselect;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -17,17 +19,27 @@ import javafx.scene.layout.VBox;
  */
 public class ChosenChampionsPanel {
     VBox vbox = new VBox();
+    
     Image ICON_48;
     /*
     The constructor for this class currently uses the default mario image. It will need to be expanded later such that this image will change whenever a champion is selected, and will have an Empty image until that occurs.
     */
-    public ChosenChampionsPanel(ChampionSelect championSelect){
+    public ChosenChampionsPanel(ChampionSelect championSelect, String label){
+        Label header = new Label(label);
+        vbox.getChildren().add(header);
         ICON_48 = championSelect.getIcon_48();
         vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
         vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
         vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
         vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
         vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
+        for(int i=0; i<vbox.getChildren().size(); i++){
+            vbox.getChildren().get(i).setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");    
+        }
+        
+        //vbox.setSpacing(50);
+        //vbox.setAlignment(Pos.CENTER);
+        //vbox.setMinWidth(400);
     }
     public VBox get(){
         return vbox;
