@@ -37,7 +37,7 @@ public class ChosenChampionsPanel {
             vbox.getChildren().get(i).setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");    
         }
         
-        //vbox.setSpacing(50);
+        vbox.setSpacing(50);
         //vbox.setAlignment(Pos.CENTER);
         //vbox.setMinWidth(400);
     }
