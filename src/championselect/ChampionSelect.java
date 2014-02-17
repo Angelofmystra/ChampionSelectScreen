@@ -122,9 +122,10 @@ public class ChampionSelect extends Application {
         championScroller.setContent(tilePane);
         
         championsTab.setContent(championScroller);
-        
-        Button temporary = new Button("Temporary Skin Object");
-        skinsTab.setContent(temporary);
+        SkinDisplayShelf asheSkinsDisplayShelf = new SkinDisplayShelf();
+        asheSkinsDisplayShelf.make();
+        skinsTab.setContent(asheSkinsDisplayShelf.get());
+
         champsAndSkinsPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         champsAndSkinsPane.getTabs().addAll(championsTab, skinsTab);
         champsAndSkinsPane.setMaxHeight(600);
