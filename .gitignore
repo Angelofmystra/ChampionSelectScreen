@@ -43,3 +43,7 @@ hs_err_pid*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Undesired java files #
+######################
+*Sample*.java
