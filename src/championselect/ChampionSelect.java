@@ -74,13 +74,13 @@ public class ChampionSelect extends Application {
         //Rectangle leftRectangle = new Rectangle(23, 400, Color.BLUE); //745
         //leftRectangle.setStroke(Color.BLUE);
         //borderPane.setLeft(leftRectangle);
-        ChosenChampionsPanel leftPanel = new ChosenChampionsPanel(this, "Your Team");              
+        final ChosenChampionsPanel leftPanel = new ChosenChampionsPanel(this, "Your Team");              
         borderPane.setLeft(leftPanel.get());
         //Right content
         //Rectangle rightRectangle = new Rectangle(23, 400, Color.GREENYELLOW);
         //rightRectangle.setStroke(Color.GREENYELLOW);
         //borderPane.setRight(rightRectangle);
-        ChosenChampionsPanel rightPanel = new ChosenChampionsPanel(this, "Enemy Team");              
+        final ChosenChampionsPanel rightPanel = new ChosenChampionsPanel(this, "Enemy Team");              
         borderPane.setRight(rightPanel.get());
         
         HBox topboxes = new HBox();
@@ -105,11 +105,31 @@ public class ChampionSelect extends Application {
         statusBox.setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");
         
         TilePane tilePane = new TilePane();
- 
+        
+        final Model model = new Model();
+        
+        
         Button[] buttons = new Button[100];
         for (int j = 0; j < buttons.length; j++) {
-            buttons[j] = new Button("", new ImageView(ICON_48));
+            ImageView imageview = new ImageView(ICON_48); // done like this to faciliate easier controller setOnAction
+            buttons[j] = new Button("", imageview);
+            buttons[j].setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                if(model.getCurrentPlayer() != 11){
+                    if(model.getCurrentPlayer() <= 5){
+                        leftPanel.updatePlayer(model.getCurrentPlayer(), new ImageView(ICON_48));
+                        model.nextPlayer();    
+                    }else{
+                        rightPanel.updatePlayer(model.getCurrentPlayer()-5, new ImageView(ICON_48));
+                        model.nextPlayer();
+                    }                  
+                } else {
+                    // do nothing
+                }              
+            }
+        });
             tilePane.getChildren().add(buttons[j]);
+            
         }
         
         TabPane champsAndSkinsPane = new TabPane();

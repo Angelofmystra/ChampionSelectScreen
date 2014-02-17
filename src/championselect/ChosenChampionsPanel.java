@@ -18,30 +18,43 @@ import javafx.scene.layout.VBox;
  * @author bertrandbrompton
  */
 public class ChosenChampionsPanel {
-    VBox vbox = new VBox();
+    private VBox vbox = new VBox();
     
     Image ICON_48;
+    private static final Image ICON_BLANK = new Image(BorderPaneSample.class.getResourceAsStream("black.png"));
     /*
     The constructor for this class currently uses the default mario image. It will need to be expanded later such that this image will change whenever a champion is selected, and will have an Empty image until that occurs.
     */
     public ChosenChampionsPanel(ChampionSelect championSelect, String label){
+        
         Label header = new Label(label);
         vbox.getChildren().add(header);
         ICON_48 = championSelect.getIcon_48();
-        vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
-        vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
-        vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
-        vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
-        vbox.getChildren().add(new Button("", new ImageView(ICON_48)));
+        Button champion1 = new Button("", new ImageView(ICON_BLANK));
+        Button champion2 = new Button("", new ImageView(ICON_BLANK));
+        Button champion3 = new Button("", new ImageView(ICON_BLANK));
+        Button champion4 = new Button("", new ImageView(ICON_BLANK));
+        Button champion5 = new Button("", new ImageView(ICON_BLANK));
+        
+        vbox.getChildren().add(champion1);
+        vbox.getChildren().add(champion2);
+        vbox.getChildren().add(champion3);
+        vbox.getChildren().add(champion4);
+        vbox.getChildren().add(champion5);
         for(int i=0; i<vbox.getChildren().size(); i++){
             vbox.getChildren().get(i).setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");    
         }
-        
         vbox.setSpacing(50);
-        //vbox.setAlignment(Pos.CENTER);
-        //vbox.setMinWidth(400);
     }
     public VBox get(){
         return vbox;
+    }
+    /*
+    The purpose of this function is to update the player's icon when a new champion is selected from the grid of champions available.
+    */
+    public void updatePlayer(int index, ImageView imageview){
+        Button button = new Button("", imageview);
+        button.setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");
+        vbox.getChildren().set(index, button);   
     }
 }
