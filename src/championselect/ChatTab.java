@@ -31,8 +31,7 @@ public class ChatTab {
         listview = new ListView();
         VBox vbox = new VBox();               
         listview.setItems(chatItems);
-        //listview.setStyle("-fx-fill: red;");
-        
+       
         textField.setText("write crap here");
         textField.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
