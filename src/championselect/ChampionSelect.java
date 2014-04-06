@@ -42,6 +42,9 @@ public class ChampionSelect extends Application {
     private static final Image ICON_48 = new Image(BorderPaneSample.class.getResourceAsStream("icon-48x48.png"));
     private static final Image ICON_47 = new Image(BorderPaneSample.class.getResourceAsStream("Heal.png"));
     private static final Image ICON_46 = new Image(BorderPaneSample.class.getResourceAsStream("Flash.png"));
+    private static final Image ICON_49 = new Image(BorderPaneSample.class.getResourceAsStream("draven.png"));
+    
+    private static final String BUTTON_STYLE = "-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;";
     @Override
     public void start(Stage primaryStage) {
         Group root = new Group();
@@ -102,35 +105,14 @@ public class ChampionSelect extends Application {
         Button theirTimer = new Button("26");
         statusBox.getChildren().addAll(yourTimer, status, theirTimer);
         statusBox.setAlignment(Pos.CENTER);
-        statusBox.setStyle("-fx-padding: 12 30 12 30; -fx-focus-color: firebrick;");
+        statusBox.setStyle(BUTTON_STYLE);
         
         TilePane tilePane = new TilePane();
         
         final Model model = new Model();
         
         
-        Button[] buttons = new Button[100];
-        for (int j = 0; j < buttons.length; j++) {
-            ImageView imageview = new ImageView(ICON_48); // done like this to faciliate easier controller setOnAction
-            buttons[j] = new Button("", imageview);
-            buttons[j].setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                if(model.getCurrentPlayer() != 11){
-                    if(model.getCurrentPlayer() <= 5){
-                        leftPanel.updatePlayer(model.getCurrentPlayer(), new ImageView(ICON_48));
-                        model.nextPlayer();    
-                    }else{
-                        rightPanel.updatePlayer(model.getCurrentPlayer()-5, new ImageView(ICON_48));
-                        model.nextPlayer();
-                    }                  
-                } else {
-                    // do nothing
-                }              
-            }
-        });
-            tilePane.getChildren().add(buttons[j]);
-            
-        }
+        PopulateChampionOptions populateChampionOptions = new PopulateChampionOptions(model, leftPanel, rightPanel, tilePane);
         
         TabPane champsAndSkinsPane = new TabPane();
         Tab championsTab = new Tab("Champions");
@@ -150,11 +132,32 @@ public class ChampionSelect extends Application {
         champsAndSkinsPane.getTabs().addAll(championsTab, skinsTab);
         champsAndSkinsPane.setMaxHeight(600);
         Button lockin = new Button("Lock In");
+        lockin.setStyle(BUTTON_STYLE);
         HBox spells = new HBox();
         spells.getChildren().add(new ImageView(ICON_46));
         spells.getChildren().add(new ImageView(ICON_47));
         
-        Button runesnmasteries = new Button("Runes and Masteries");
+        VBox runesnmasteries = new VBox();
+        DropDownMenu runes = new DropDownMenu();
+        
+        /*runes.add("ADC I");
+        runes.add("ADC II");
+        runes.add("Top I");
+        runes.add("Support I");
+        runes.add("Support II");
+        runes.add("Jungler I");
+        runes.add("YOLO");*/
+        
+        DropDownMenu masteries = new DropDownMenu();
+        /*masteries.add("0/9/21");
+        masteries.add("21/0/9");
+        masteries.add("0/30/0");
+        masteries.add("Support I");
+        masteries.add("Support II");
+        masteries.add("Jungler I");
+        masteries.add("Jungler I");*/
+            
+        runesnmasteries.getChildren().addAll(new Label("Runes & Masteries"), runes.get(), masteries.get());
         
         panelBox.getChildren().addAll(runesnmasteries, spells, lockin);
         
