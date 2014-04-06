@@ -38,7 +38,9 @@ class BottomPanel {
         */
         ChatTab allyChatTab = new ChatTab("Ally Chat");
         ChatTab enemyChatTab = new ChatTab("Enemy Chat");
+        
         TabPane tabPane = new TabPane();
+        //tabPane.setMinWidth(tabPane.getTabMaxWidth());
         tabPane.setMinWidth(900);
         tabPane.getTabs().add(allyChatTab.getTab());
         tabPane.getTabs().add(enemyChatTab.getTab());

@@ -31,7 +31,7 @@ public class ChatTab {
         listview = new ListView();
         VBox vbox = new VBox();               
         listview.setItems(chatItems);
-       
+        
         textField.setText("write crap here");
         textField.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
@@ -41,7 +41,8 @@ public class ChatTab {
         });
         ScrollPane sp = new ScrollPane();
         sp.setContent(vbox);
-        
+        //sp.setMinWidth(700);
+        vbox.setMinWidth(885); // this manipulates the chat box.
         tab.setContent(sp);
         HBox textFieldBox = new HBox();
         Button sendButton = new Button("Send");
